@@ -10,7 +10,8 @@ pipeline {
         stage('Checkout') {
             steps {
                 // Replace with your repo URL
-                git branch: 'main', url: 'https://github.com/kumarianu264-arch/DemoProject.git'
+                git branch: 'main', url: 'https://github.com/kumarianu264-arch/DemoProject.git',
+                credentialsId: 'anugit-creds'
             }
         }
 
