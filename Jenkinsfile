@@ -27,3 +27,10 @@ stage('Debug Workspace') {
         sh 'find . -name "pom.xml"'
     }
 }
+stage('Build with Maven') {
+            steps {
+                // If pom.xml is in a subfolder, e.g. 'my-app'
+                dir('my-app') {
+                    sh 'mvn clean install'
+                }
+            }    
