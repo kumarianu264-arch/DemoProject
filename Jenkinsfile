@@ -22,18 +22,6 @@ pipeline {
           }
        } 
 
-        stage('B') {
-            steps {
-                script {
-                    try { 
-                        sh 'exit 1'
-                    } catch(e) {
-                        echo "Caught an error: ${e}"
-                    } 
-                }
-            }
-        }
-
         stage('C') {
             steps {
                 echo "Continue to next stages"
