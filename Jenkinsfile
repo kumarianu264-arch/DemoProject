@@ -17,5 +17,13 @@ pipeline {
                 sh 'mvn clean install'
             }
         }
+        
+    }
+}
+stage('Debug Workspace') {
+    steps {
+        sh 'pwd'
+        sh 'ls -la'
+        sh 'find . -name "pom.xml"'
     }
 }
