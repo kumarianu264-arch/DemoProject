@@ -1,36 +1,37 @@
 pipeline {
-    agent any
-
+    agent any 
+    
     triggers {
+        pollSCM('H/2 * * * *')
         githubPush()
     }
 
     stages {
-        stage('Checkout') {
+        stage('Checkout'){
             steps {
-                git url: 'https://github.com/kumarianu264-arch/DemoProject.git', branch: 'main' , credentialsId: 'apps_github'
+                // Explicitly poll will be excuted on below repo
+                git url: 'https://github.com/kumarianu264-arch/DemoProject.git', 
+                    branch: 'main', 
+                    credentialsId: 'apps_github' 
             }
         }
 
-        stage('Build with Maven') {
+       stage('A') {
+          steps {
+                echo "This is A stage test poll SCM"
+          }
+       } 
+
+        stage('C') {
             steps {
-                sh 'mvn clean install'
+                echo "Continue to next stages"
             }
         }
-        
-    }
-}
-stage('Debug Workspace') {
-    steps {
-        sh 'pwd'
-        sh 'ls -la'
-        sh 'find . -name "pom.xml"'
-    }
-}
-stage('Build with Maven') {
+
+        stage('D') {
             steps {
-                // If pom.xml is in a subfolder, e.g. 'my-app'
-                dir('my-app') {
-                    sh 'mvn clean install'
-                }
-            }    
+                echo "Continue to next stages"
+            }
+        }
+      
+  
