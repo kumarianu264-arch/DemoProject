@@ -1,19 +1,14 @@
 pipeline {
     agent any
-
-    triggers {
-        githubPush()
-    }
-
     stages {
         stage('Checkout') {
             steps {
-                git url: 'https://github.com/kumarianu264-arch/DemoProject.git', branch: 'main' , credentialsId: 'apps_github'
+                git url: 'https://github.com/kumarianu264-arch/DemoProject.git', branch: 'main', credentialsId:apps_github
             }
         }
-
-        stage('Build with Maven') {
+        stage('Build') {
             steps {
+                sh 'ls -al'   // 👈 check files in workspace
                 sh 'mvn clean install'
             }
         }
