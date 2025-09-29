@@ -1,5 +1,5 @@
 pipeline {
-    agent any
+    agent maven
     triggers {
         // Trigger build on every push from GitHub webhook
         githubPush()
@@ -18,7 +18,7 @@ pipeline {
             steps {
                  stage('Build with Maven') {
             steps {
-                dir('some-subdir') { // 👈 change this if pom.xml is in a subfolder
+                dir('some-subdir') {
                     sh 'mvn clean install'
                 // Clean and build using Maven
                 sh 'mvn clean install'
