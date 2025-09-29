@@ -1,28 +1,52 @@
 pipeline {
-    agent maven
+    agent any 
+    
     triggers {
-        // Trigger build on every push from GitHub webhook
+        pollSCM('H/2 * * * *')
+        cron('H/15 * * * 1-5')
         githubPush()
     }
 
     stages {
-        stage('Checkout') {
+        stage('Checkout'){
             steps {
-                // Replace with your repo URL
-                git branch: 'main', url: 'https://github.com/kumarianu264-arch/DemoProject.git',
-                credentialsId: 'apps_github'
+                // Explicitly poll will be excuted on below repo
+                git url: 'https://github.com/kumarianu264-arch/DemoProject.git', 
+                    branch: 'main', 
+                    credentialsId: 'apps_github' 
             }
         }
 
-        stage('Build with Maven') {
+       stage('A') {
+          steps {
+                echo "This is A stage test poll SCM"
+          }
+       } 
+
+        stage('B') {
             steps {
-                 stage('Build with Maven') {
-            steps {
-                dir('some-subdir') {
-                    sh 'mvn clean install'
-                // Clean and build using Maven
-                sh 'mvn clean install'
+                script {
+                    try { 
+                        sh 'exit 1'
+                    } catch(e) {
+                        echo "Caught an error: ${e}"
+                    } 
+                }
             }
         }
-    }
+
+        stage('C') {
+            steps {
+                echo "Continue to next stages"
+            }
+        }
+
+        stage('D') {
+            steps {
+                echo "Continue to next stages"
+            }
+        }
+      
+    }   
+
 }
