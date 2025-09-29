@@ -22,17 +22,12 @@ pipeline {
           }
        } 
 
-        stage('C') {
+        stage('B') {
             steps {
                 echo "Continue to next stages"
             }
         }
 
-        stage('D') {
-            steps {
-                echo "Continue to next stages"
-            }
-        }
       
     }   
 
