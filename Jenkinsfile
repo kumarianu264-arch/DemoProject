@@ -1,6 +1,5 @@
 pipeline {
-    agent { label 'maven' }
-
+    agent any
     triggers {
         // Trigger build on every push from GitHub webhook
         githubPush()
