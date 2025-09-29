@@ -5,7 +5,7 @@ pipeline {
         pollSCM('H/2 * * * *')
         githubPush()
     }
-    
+
 
     stages {
         stage('Checkout'){
@@ -35,5 +35,4 @@ pipeline {
                 echo "Continue to next stages"
             }
         }
-      
-  
+    }  
