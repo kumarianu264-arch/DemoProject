@@ -16,6 +16,10 @@ pipeline {
 
         stage('Build with Maven') {
             steps {
+                 stage('Build with Maven') {
+            steps {
+                dir('some-subdir') { // 👈 change this if pom.xml is in a subfolder
+                    sh 'mvn clean install'
                 // Clean and build using Maven
                 sh 'mvn clean install'
             }
