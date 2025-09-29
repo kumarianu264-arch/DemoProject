@@ -5,6 +5,7 @@ pipeline {
         pollSCM('H/2 * * * *')
         githubPush()
     }
+    
 
     stages {
         stage('Checkout'){
@@ -15,6 +16,7 @@ pipeline {
                     credentialsId: 'apps_github' 
             }
         }
+    }    
 
        stage('A') {
           steps {
