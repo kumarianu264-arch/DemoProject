@@ -7,7 +7,7 @@ pipeline {
         stage ('checkout') {
             steps {
                 git url:'https://github.com/kumarianu264-arch/DemoProject.git',
-                git branch: 'main',
+                git branch:'main',
                 credentialsId:'apps_github'
             }
         }
