@@ -11,7 +11,7 @@ pipeline {
             steps {
                 git url: 'https://github.com/kumarianu264-arch/DemoProject.git',
                 branch: 'main'
-                credentialsId: 'apps_github'
+               
             }
         }
 
