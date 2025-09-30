@@ -3,7 +3,7 @@ pipeline {
 
     triggers {
         cron('H/2 * * * *')
-        githubpush()
+        
     }
 
     stages{
