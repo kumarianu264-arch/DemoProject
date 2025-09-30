@@ -1,34 +1,31 @@
 pipeline {
-    agent any 
+    agent any
     
     triggers {
-           cron('H/15 * * * 1-5')
-        githubPush()
-    }
+        cron('H/2 * * * *')
+        githubpush()
+    }  
 
     stages {
-        stage('Checkout'){
-            steps {
-                // Explicitly poll will be excuted on below repo
-                git url: 'https://github.com/kumarianu264-arch/DemoProject.git', 
-                    branch: 'main', 
-                    credentialsId: 'apps_github' 
-            }
+        stage('checkout')
+        steps {
+              git url:'https://github.com/kumarianu264-arch/DemoProject.git',
+              branch:'main',
+              credentialsId:'apps_github'
+
         }
+    } 
 
-       stage('A') {
-          steps {
-                echo "This is A stage test cron"
-          }
-       } 
-
-        stage('B') {
-            steps {
-                echo "Continue to next stages"
-            }
+    stage('A') {
+        steps {
+            echo "This is stage A"
         }
+    }
 
-      
-    }   
-
+    stage('B') {
+        steps {
+            echo "This is for testing"
+        }
+    } 
 }
+           
