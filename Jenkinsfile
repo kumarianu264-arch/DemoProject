@@ -2,7 +2,7 @@ pipeline {
     agent any
     
     triggers {
-        cron('H/ * * * *')   // Run every 2 minutes
+        cron('H/30 * * * *')   // Run every 2 minutes
         githubPush()          // Correct camelCase trigger
     }
 
