@@ -1,9 +1,9 @@
 pipeline {
-    agent any
+    agent { label 'maven' }   // Run only on nodes labeled "maven"
     
     triggers {
-        cron('H * * * *')   // Run every 2 minutes
-        githubPush()          // Correct camelCase trigger
+        cron('H * * * *')     // Run every 1 hour
+        githubPush()          // Also trigger on GitHub push
     }
 
     stages {
@@ -15,15 +15,15 @@ pipeline {
             }
         }
 
-        stage('A') {
+        stage('Build') {
             steps {
-                echo "Running Stage A"
+                sh 'mvn clean install'   // Run Maven build
             }
         }
 
-        stage('B') {
+        stage('Test') {
             steps {
-                echo "This is for testing"
+                sh 'mvn test'            // Run Maven tests
             }
         }
     }
