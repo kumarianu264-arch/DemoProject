@@ -1,30 +1,27 @@
 pipeline {
-    agent any
+    agent any 
     
     triggers {
-        cron('H * * * *')   // Run every 2 minutes
-        githubPush()          // Correct camelCase trigger
+        cron('H * * * *')
+        githubpush()
     }
 
     stages {
-        stage('Checkout') {
-            steps {
-                git url: 'https://github.com/kumarianu264-arch/DemoProject.git',
-                    branch: 'main',
-                    credentialsId: 'apps_github'
-            }
-        }
+        stage('checkout') {
+        steps {
+            git url: (''),
+            branch: 
+            credentialsId
 
+        }
+        }
         stage('A') {
-            steps {
-                echo "Running Stage A"
-            }
-        }
+        steps {
+            echo "Building the code"
 
-        stage('B') {
-            steps {
-                echo "This is for testing"
-            }
-        }
-    }
-}
+            stage('B') {
+                steps {
+                    echo "Testing the code"
+                    
+
+
