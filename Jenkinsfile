@@ -1,35 +1,38 @@
 pipeline {
     agent any
 
-    triggers {
-        cron('H/2 * * * *')
-        
-    }
-
     stages {
-        stage('checkout') {
+        stage('Checkout') {
             steps {
-                git url: 'https://github.com/kumarianu264-arch/DemoProject.git',
-                branch: 'main'
-               
+                git url: 'https://github.com/kumarianu264-arch/DemoProject.git', branch: 'main'
             }
         }
 
-        stage('A') {
+        stage('Install Dependencies') {
             steps {
-                echo "Testing"
+                sh 'npm install'
             }
         }
 
-        stage('B') {
+        stage('Run Tests') {
             steps {
-               echo "Bulding"
+                sh 'npm test'
+            }
+        }
+
+        stage('Build') {
+            steps {
+                sh 'npm run build'
             }
         }
     }
-}                            
 
-            
-            
-            
-
+    post {
+        success {
+            echo '🎉 Build completed successfully!'
+        }
+        failure {
+            echo '❌ Build failed. Check logs!'
+        }
+    }
+}
